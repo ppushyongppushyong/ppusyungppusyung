@@ -1,0 +1,25 @@
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary Files
+tmp/
+temp/
+
+# Node modules (if needed later)
+node_modules/
+
+# Sprite assets (팀원들이 각자 다운로드)
+assets/sprites/martial-hero/*.png
+!assets/sprites/martial-hero/.gitkeep

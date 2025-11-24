@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Read(//Users/reddit/Project/school/뿌슝뿌슝/**)",
+      "WebFetch(domain:itch.io)",
+      "WebFetch(domain:opengameart.org)",
+      "WebFetch(domain:rancic.itch.io)",
+      "WebFetch(domain:chasersgaming.itch.io)",
+      "WebFetch(domain:luizmelo.itch.io)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
