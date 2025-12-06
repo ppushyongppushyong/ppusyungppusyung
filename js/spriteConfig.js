@@ -102,7 +102,7 @@ const SPRITE_PRESETS = {
         path: 'run/',
         filePattern: 'Run_{n}.png',
         frameCount: 4,
-        scale: 0.164 // 1824/300 = 6.08배 크므로 1/6.08 = 0.164
+        scale: 1.0 // 새로운 달리기 애니메이션
       },
       JUMP: {
         path: 'idle/',
@@ -120,13 +120,13 @@ const SPRITE_PRESETS = {
         path: 'right_punch/',
         filePattern: 'right_punch_{n}.png',
         frameCount: 6,
-        scale: 0.164 // 1824/300 = 6.08배 크므로 1/6.08 = 0.164
+        scale: 1.0 // 새로운 오른손 펀치 애니메이션
       },
       ATTACK2: {
         path: 'right_punch/',
         filePattern: 'right_punch_{n}.png',
         frameCount: 6,
-        scale: 0.164
+        scale: 1.0 // 왼손 펀치도 같은 애니메이션 사용
       },
       TAKE_HIT: {
         path: 'idle/',
