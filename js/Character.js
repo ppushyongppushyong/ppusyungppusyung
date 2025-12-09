@@ -110,7 +110,7 @@ class Character {
     if (this.animations[this.states.RUN]) {
       this.animationManager = new AnimationManager(
         this.animations[this.states.RUN],
-        12, // frameRate
+        24, // frameRate
         true // loop
       );
     }
@@ -290,18 +290,18 @@ class Character {
     }
 
     let loop = true;
-    let frameRate = 10;
+    let frameRate = 24;
 
     // 상태별 애니메이션 설정
     switch (this.currentState) {
       case this.states.IDLE:
         loop = true;
-        frameRate = 8;
+        frameRate = 24;
         break;
 
       case this.states.RUN:
         loop = true;
-        frameRate = 12;
+        frameRate = 24;
         break;
 
       case this.states.RIGHT_PUNCH:
@@ -318,7 +318,7 @@ class Character {
 
       case this.states.DAMAGED:
         loop = false;
-        frameRate = 10;
+        frameRate = 20;
         break;
 
       case this.states.DEAD:
