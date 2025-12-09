@@ -25,7 +25,7 @@ class WallManager {
 
     // Hit Zone 설정 (캐릭터 앞쪽 공격 판정 영역)
     this.hitZoneOffset = 150; // 캐릭터 중심에서 Hit Zone까지의 거리
-    this.hitZoneWidth = 200;  // Hit Zone 너비
+    this.hitZoneWidth = 300;  // Hit Zone 너비
 
     // 충돌 영역 설정 (캐릭터 몸통)
     this.characterWidth = 100; // 캐릭터 충돌 판정 너비
@@ -231,7 +231,7 @@ class WallManager {
         wall.hasBeenJudged = true;
 
         // MISS 판정이 아닐 때만 벽 파괴
-        const destroyed = judgment !== 'miss';
+        // const destroyed = judgment !== 'miss';
 
         // 원래 위치 저장 (벽 이동 전)
         const originalX = wall.x;
@@ -267,9 +267,9 @@ class WallManager {
    * @returns {string} 판정 타입
    */
   calculateJudgment(distance) {
-    const wowZone = this.hitZoneWidth * 0.125;   // 중심 12.5% (25% width) - WOW
-    const greatZone = this.hitZoneWidth * 0.25;  // 중심 25% (50% width) - GREAT
-    const goodZone = this.hitZoneWidth * 0.40;   // 중심 40% (80% width) - GOOD
+    const wowZone = this.hitZoneWidth * 0.250;   // 중심 12.5% (25% width) - WOW
+    const greatZone = this.hitZoneWidth * 0.50;  // 중심 25% (50% width) - GREAT
+    const goodZone = this.hitZoneWidth * 0.90;   // 중심 40% (80% width) - GOOD
     // MISS는 goodZone 밖 ~ hitZoneWidth 안쪽
 
     if (distance <= wowZone) {
@@ -531,7 +531,7 @@ push();
 noStroke();
 fill(0, 0, 0, 120); // 반투명 검정 박스
 
-const hitRange = 150; 
+const hitRange = 220; 
 const leftX = characterX - hitRange;
 const rightX = characterX + hitRange;
 
