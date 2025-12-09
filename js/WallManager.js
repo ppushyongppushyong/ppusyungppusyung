@@ -43,7 +43,7 @@ class WallManager {
     this.beatInterval = 500; // 비트 간격 (ms)
 
     // 속도 증가 시스템
-    this.baseWallSpeed = 8; // 기본 벽 속도
+    this.baseWallSpeed = 16; // 기본 벽 속도
     this.currentSpeedMultiplier = 1.0; // 현재 속도 배율
     this.maxSpeedMultiplier = 2.0; // 최대 속도 배율
     this.speedIncreaseEnabled = true; // 속도 증가 활성화 여부
