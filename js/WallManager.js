@@ -487,6 +487,7 @@ class WallManager {
    * @param {number} characterX - 캐릭터 X 위치
    */
   displayDebug(characterX) {
+    
     if (!this.debugMode) return;
 
     push();
@@ -528,6 +529,19 @@ class WallManager {
       wall.displayDebug(hitZoneX, this.hitZoneWidth);
     }
 
+// 판정 박스 시각화
+push();
+noStroke();
+fill(0, 0, 0, 120); // 반투명 검정 박스
+
+const hitRange = 150; 
+const leftX = characterX - hitRange;
+const rightX = characterX + hitRange;
+
+rect(leftX, 0, hitRange * 2, this.canvasHeight);
+pop();
+
+    
     // 디버그 텍스트
     fill(255);
     noStroke();
