@@ -17,7 +17,7 @@ class WallManager {
     // 스폰 설정
     this.spawnInterval = 2000; // 벽 생성 간격 (ms)
     this.lastSpawnTime = 0;
-    this.wallSpeed = 8; // 벽 이동 속도
+    this.wallSpeed = 16; // 벽 이동 속도
 
     // 벽 Y 위치 (지면에 맞춤)
     // 벽 생성 위치 (gameHeight - 200 - 75) -> (gameHeight - 200 - 200) 으로 변경
