@@ -25,7 +25,7 @@ class WallManager {
 
     // Hit Zone 설정 (캐릭터 앞쪽 공격 판정 영역)
     this.hitZoneOffset = 150; // 캐릭터 중심에서 Hit Zone까지의 거리
-    this.hitZoneWidth = 300;  // Hit Zone 너비
+    this.hitZoneWidth = 210;  // Hit Zone 너비
 
     // 충돌 영역 설정 (캐릭터 몸통)
     this.characterWidth = 100; // 캐릭터 충돌 판정 너비
@@ -499,25 +499,25 @@ class WallManager {
     stroke(255, 100, 100);
     strokeWeight(2);
     rectMode(CENTER);
-    rect(hitZoneX, this.wallY, this.hitZoneWidth, 300);
+    rect(hitZoneX, this.wallY, this.hitZoneWidth, 210);
 
     // GOOD 존 표시 (파란색 - GOOD 이미지 색상) - 중심 40%
     const goodWidth = this.hitZoneWidth * 0.9;
     fill(100, 180, 255, 20);
     stroke(100, 180, 255);
-    rect(hitZoneX, this.wallY, goodWidth, 300);
+    rect(hitZoneX, this.wallY, goodWidth, 210);
 
     // GREAT 존 표시 (초록색 - GREAT 이미지 색상) - 중심 25%
     const greatWidth = this.hitZoneWidth * 0.5;
     fill(100, 255, 150, 25);
     stroke(100, 255, 150);
-    rect(hitZoneX, this.wallY, greatWidth, 300);
+    rect(hitZoneX, this.wallY, greatWidth, 210);
 
     // WOW 존 표시 (노란색 - WOW 이미지 색상) - 중심 12.5%
     const wowWidth = this.hitZoneWidth * 0.25;
     fill(255, 220, 100, 30);
     stroke(255, 220, 100);
-    rect(hitZoneX, this.wallY, wowWidth, 300);
+    rect(hitZoneX, this.wallY, wowWidth, 210);
 
     // 캐릭터 충돌 영역 표시 (빨간 영역)
     fill(255, 0, 0, 50);
