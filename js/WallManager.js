@@ -524,10 +524,7 @@ class WallManager {
     stroke(255, 0, 0);
     rect(characterX, this.wallY, this.characterWidth, 200);
 
-    // 각 벽의 디버그 표시
-    for (let wall of this.walls) {
-      wall.displayDebug(hitZoneX, this.hitZoneWidth);
-    }
+  
 
 // 판정 박스 시각화
 push();
