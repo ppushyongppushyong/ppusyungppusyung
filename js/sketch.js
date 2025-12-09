@@ -1061,7 +1061,6 @@ function drawStartScreen() {
   fill(100, 255, 100);
   text('SPACE 를 눌러 시작', BASE_WIDTH / 2, BASE_HEIGHT / 2 - 40);
 
-  /* **조작 설명 박스 주석 삭제 처리
   // 조작 설명 박스
   fill(255, 255, 255, 30);
   rectMode(CENTER);
@@ -1084,7 +1083,6 @@ function drawStartScreen() {
   text('점프 공격', BASE_WIDTH / 2 - 50, BASE_HEIGHT / 2 + 75);
   text('펀치 공격 (오른손 -> 왼손 -> 어퍼컷)', BASE_WIDTH / 2 - 50, BASE_HEIGHT / 2 + 105);
   text('게임 리셋', BASE_WIDTH / 2 - 50, BASE_HEIGHT / 2 + 135);
-  */
 
   // 음악 로드 상태
   textAlign(CENTER, CENTER);
