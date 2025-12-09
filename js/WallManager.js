@@ -25,7 +25,7 @@ class WallManager {
 
     // Hit Zone 설정 (캐릭터 앞쪽 공격 판정 영역)
     this.hitZoneOffset = 150; // 캐릭터 중심에서 Hit Zone까지의 거리
-    this.hitZoneWidth = 300;  // Hit Zone 너비
+    this.hitZoneWidth = 3000;  // Hit Zone 너비
 
     // 충돌 영역 설정 (캐릭터 몸통)
     this.characterWidth = 100; // 캐릭터 충돌 판정 너비
