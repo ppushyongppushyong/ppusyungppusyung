@@ -930,6 +930,15 @@ class WallManager {
 
 
 
+    // 각 벽의 히트박스 표시
+    for (let wall of this.walls) {
+      if (wall.currentState === wall.states.NORMAL) {
+        wall.displayDebug(hitZoneX, this.hitZoneWidth);
+      }
+    }
+
+
+
     // MISS 존 = 전체 Hit Zone (빨간색 - MISS 이미지 색상)
     fill(255, 100, 100, 15);
     stroke(255, 100, 100);
@@ -1019,9 +1028,9 @@ class WallManager {
 
     textAlign(LEFT, TOP);
 
-    text(`벽 수: ${this.walls.length}`, 20, 80);
+    text(`벽 수: ${this.walls.length}`, 20, 150);
 
-    text(`파괴한 벽: ${this.destroyedCount}`, 20, 100);
+    text(`파괴한 벽: ${this.destroyedCount}`, 20, 170);
 
 
 
