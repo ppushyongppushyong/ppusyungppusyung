@@ -11,6 +11,8 @@ let spriteSheets = {};
 let animations = {};
 let assetsLoaded = false;
 let isAutoPlay = false
+let titleLogoImg;
+
 // 벽 시스템
 let wallManager;
 let wallSprites = []; // 벽 스프라이트 배열
@@ -99,6 +101,18 @@ function preload() {
 
   // 사운드 포맷 설정
   soundFormats('mp3', 'ogg', 'wav');
+
+  //타이틀 로고 이미지 로드
+  loadImage(
+    'assets/ui/BSBS_LOGO.png', 
+    (img) => {
+      titleLogoImg = img;
+      console.log('✓ 타이틀 로고 로드 완료');
+    },
+    (err) => {
+      console.warn('⚠ 타이틀 로고 로드 실패:', err);
+    }
+  );
 
   // 스프라이트 로드 시도
   try {
@@ -1053,11 +1067,30 @@ function drawStartScreen() {
   rect(0, 0, BASE_WIDTH, BASE_HEIGHT);
 
   // 게임 타이틀
-  fill(255);
-  textAlign(CENTER, CENTER);
-  textSize(64);
-  text('뿌슝뿌슝', BASE_WIDTH / 2, BASE_HEIGHT / 2 - 250);
+ // fill(255);
+ // textAlign(CENTER, CENTER);
+ // textSize(64);
+//  text('뿌슝뿌슝', BASE_WIDTH / 2, BASE_HEIGHT / 2 - 250);
+  // [새로운 코드] 이미지 타이틀
+  if (titleLogoImg) {
+    imageMode(CENTER);
+    
+    // 로고 크기 설정
+    // 예: 가로 600px, 세로는 비율에 맞춰 자동 조절
+    const logoWidth = 600; 
+    const logoHeight = (titleLogoImg.height / titleLogoImg.width) * logoWidth;
+    
+    // 이미지 그리기 (기존 텍스트 위치: BASE_HEIGHT / 2 - 250)
+    image(titleLogoImg, BASE_WIDTH / 2, BASE_HEIGHT / 2 - 250, logoWidth, logoHeight);
+  } else {
+    // 이미지가 로드되지 않았을 경우를 대비한 백업 텍스트
+    fill(255);
+    textAlign(CENTER, CENTER);
+    textSize(64);
+    text('뿌슝뿌슝', BASE_WIDTH / 2, BASE_HEIGHT / 2 - 250);
+  }
 
+  
   // 곡 선택 박스
   fill(255, 255, 255, 40);
   rectMode(CENTER);
