@@ -1094,17 +1094,17 @@ function drawStartScreen() {
   // 곡 선택 박스
   fill(255, 255, 255, 40);
   rectMode(CENTER);
-  rect(BASE_WIDTH / 2, BASE_HEIGHT / 2 - 230, 600, 80, 15);
+  rect(BASE_WIDTH / 2, BASE_HEIGHT / 2 - 70, 600, 80, 15);
 
   // 곡 선택 UI
   textSize(18);
   fill(255, 220, 100);
-  text('[ 곡 선택 ]', BASE_WIDTH / 2, BASE_HEIGHT / 2 - 260);
+  text('[ 곡 선택 ]', BASE_WIDTH / 2, BASE_HEIGHT / 2 - 100);
 
   // 선택된 곡 이름
   textSize(24);
   fill(255);
-  text(config.name, BASE_WIDTH / 2, BASE_HEIGHT / 2 - 235);
+  text(config.name, BASE_WIDTH / 2, BASE_HEIGHT / 2 - 75);
 
   // BPM 및 곡 길이 표시
   textSize(18);
@@ -1123,17 +1123,17 @@ function drawStartScreen() {
   // 곡 인덱스 표시 (박스 아래)
   textSize(14);
   fill(150);
-  text(`${selectedMusicIndex + 1} / ${MUSIC_LIST.length}`, BASE_WIDTH / 2, BASE_HEIGHT / 2 - 175);
+  text(`${selectedMusicIndex + 1} / ${MUSIC_LIST.length}`, BASE_WIDTH / 2, BASE_HEIGHT / 2 - 15);
 
   // 시작 안내
   textSize(36);
   fill(100, 255, 100);
-  text('SPACE 를 눌러 시작', BASE_WIDTH / 2, BASE_HEIGHT / 2 - 120);
+  text('SPACE 를 눌러 시작', BASE_WIDTH / 2, BASE_HEIGHT / 2 + 40);
 
   // 조작 설명 박스
   fill(255, 255, 255, 30);
   rectMode(CENTER);
-  rect(BASE_WIDTH / 2, BASE_HEIGHT / 2 + 20, 500, 180, 15);
+  rect(BASE_WIDTH / 2, BASE_HEIGHT / 2 + 180, 500, 180, 15);
 
   // 조작 설명
   textSize(24);
@@ -1143,20 +1143,20 @@ function drawStartScreen() {
 
   textSize(20);
   fill(255, 220, 100);
-  text('A', BASE_WIDTH / 2 - 100, BASE_HEIGHT / 2 + 25);
-  text('ESC', BASE_WIDTH / 2 - 100, BASE_HEIGHT / 2 + 55);
+  text('A', BASE_WIDTH / 2 - 100, BASE_HEIGHT / 2 + 185);
+  text('ESC', BASE_WIDTH / 2 - 100, BASE_HEIGHT / 2 + 215);
 
   fill(200);
   textAlign(LEFT, CENTER);
-  text('펀치 공격', BASE_WIDTH / 2 - 50, BASE_HEIGHT / 2 + 25);
-  text('게임 리셋', BASE_WIDTH / 2 - 50, BASE_HEIGHT / 2 + 55);
+  text('펀치 공격', BASE_WIDTH / 2 - 50, BASE_HEIGHT / 2 + 185);
+  text('게임 리셋', BASE_WIDTH / 2 - 50, BASE_HEIGHT / 2 + 215);
 
   // 음악 로드 상태
   textAlign(CENTER, CENTER);
   textSize(14);
   if (musicManager && musicManager.isLoaded) {
     fill(100, 255, 100);
-    text('Ready!', BASE_WIDTH / 2, BASE_HEIGHT / 2 + 95);
+    text('Ready!', BASE_WIDTH / 2, BASE_HEIGHT / 2 + 255);
 
     // 미리듣기 버튼 생성 (없으면)
     if (!previewButton) {
@@ -1179,7 +1179,7 @@ function drawStartScreen() {
     }
   } else {
     fill(255, 200, 100);
-    text('로딩 중...', BASE_WIDTH / 2, BASE_HEIGHT / 2 + 95);
+    text('로딩 중...', BASE_WIDTH / 2, BASE_HEIGHT / 2 + 255);
   }
 
   // 랭킹 박스 (오른쪽)
@@ -1712,7 +1712,7 @@ function updatePreviewButtonPosition() {
 
   // 곡 선택 박스 오른쪽에 배치
   const btnX = (windowWidth / 2) + 320 * gameScale;
-  const btnY = (windowHeight / 2) - 230 * gameScale;
+  const btnY = (windowHeight / 2) - 70 * gameScale;
   previewButton.position(btnX, btnY - 22);
 }
 
@@ -1805,7 +1805,7 @@ function styleArrowButton(btn) {
 function updateArrowButtonsPosition() {
   if (!leftArrowButton || !rightArrowButton) return;
 
-  const centerY = (windowHeight / 2) - 230 * gameScale;
+  const centerY = (windowHeight / 2) - 70 * gameScale;
 
   // 왼쪽 화살표: 곡 선택 박스 왼쪽
   const leftX = (windowWidth / 2) - 280 * gameScale;
