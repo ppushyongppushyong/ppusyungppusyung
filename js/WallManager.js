@@ -432,151 +432,96 @@ class WallManager {
 
 
   /**
-
-   * 공격 판정 - Hit Zone 내의 벽 파괴 시도
-
+   * 공격 판정 - Hit Zone 내의 벽 파괴 시도 (가장 가까운 벽부터)
    * @param {number} characterX - 캐릭터 X 위치
-
    * @returns {Object|null} 판정 결과 { type: string, destroyed: boolean } 또는 null
-
    */
-
   tryDestroyWall(characterX) {
-
     const hitZoneX = this.getHitZoneX(characterX);
 
-
-
+    // 히트존에 있는 판정 안된 벽들 찾기
+    let candidateWalls = [];
     for (let wall of this.walls) {
-
       // 이미 판정받은 벽은 건너뜀
-
       if (wall.hasBeenJudged) {
-
         continue;
-
       }
-
-
 
       if (wall.isInHitZone(hitZoneX, this.hitZoneWidth)) {
-
-        // 벽과 Hit Zone 중심 사이의 거리로 판정
-
         const distance = Math.abs(wall.x - hitZoneX);
-
-        const judgment = this.calculateJudgment(distance);
-
-
-
-        // 이 벽은 판정을 받았음을 표시
-
-        wall.hasBeenJudged = true;
-
-
-
-        // MISS 판정이 아닐 때만 벽 파괴
-
-        const destroyed = judgment !== 'miss';
-
-
-
-        // 원래 위치 저장 (벽 이동 전)
-
-        const originalX = wall.x;
-
-
-
-        if (destroyed) {
-
-          wall.destroy();
-
-          this.destroyedCount++;
-
-
-
-          // 벽을 즉시 화면 밖으로 이동 (충돌 방지)
-
-          wall.x = -1000;
-
-
-
-          // 이펙트는 원래 위치에 생성
-
-          this.createHitEffect(originalX, this.wallY);
-
-        }
-
-
-
-        // 판정 저장 (원래 위치 사용)
-
-        this.lastJudgment = {
-
-          type: judgment,
-
-          time: millis(),
-
-          x: originalX,
-
-          y: this.wallY - 100
-
-        };
-
-
-
-        return { type: judgment, destroyed: destroyed };
-
+        candidateWalls.push({ wall: wall, distance: distance });
       }
-
     }
 
-    return null;
+    // 후보가 없으면 null 반환
+    if (candidateWalls.length === 0) {
+      return null;
+    }
 
+    // 거리 기준으로 정렬 (가까운 순)
+    candidateWalls.sort((a, b) => a.distance - b.distance);
+
+    // 가장 가까운 벽 선택
+    const closest = candidateWalls[0];
+    const wall = closest.wall;
+    const distance = closest.distance;
+
+    // 판정 계산
+    const judgment = this.calculateJudgment(distance);
+
+    // 이 벽은 판정을 받았음을 표시
+    wall.hasBeenJudged = true;
+
+    // MISS 판정이 아닐 때만 벽 파괴
+    const destroyed = judgment !== 'miss';
+
+    // 원래 위치 저장 (벽 이동 전)
+    const originalX = wall.x;
+
+    if (destroyed) {
+      wall.destroy();
+      this.destroyedCount++;
+
+      // 벽을 즉시 화면 밖으로 이동 (충돌 방지)
+      wall.x = -1000;
+
+      // 이펙트는 원래 위치에 생성
+      this.createHitEffect(originalX, this.wallY);
+    }
+
+    // 판정 저장 (원래 위치 사용)
+    this.lastJudgment = {
+      type: judgment,
+      time: millis(),
+      x: originalX,
+      y: this.wallY - 100
+    };
+
+    return { type: judgment, destroyed: destroyed };
   }
 
 
 
   /**
-
    * 거리에 따른 판정 계산
-
    * @param {number} distance - Hit Zone 중심과 벽 사이의 거리
-
    * @returns {string} 판정 타입
-
    */
-
   calculateJudgment(distance) {
-
     const wowZone = this.hitZoneWidth * 0.125;   // 중심 12.5% (25% width) - WOW
-
     const greatZone = this.hitZoneWidth * 0.25;  // 중심 25% (50% width) - GREAT
-
-    const goodZone = this.hitZoneWidth * 0.40;   // 중심 40% (80% width) - GOOD
-
+    const goodZone = this.hitZoneWidth * 0.50;   // 중심 50% (100% width) - GOOD (40% → 50% 확대)
     // MISS는 goodZone 밖 ~ hitZoneWidth 안쪽
 
-
-
     if (distance <= wowZone) {
-
       return 'wow';
-
     } else if (distance <= greatZone) {
-
       return 'great';
-
     } else if (distance <= goodZone) {
-
       return 'good';
-
     } else {
-
       return 'miss';
-
     }
-
   }
 
 
@@ -1004,27 +949,16 @@ class WallManager {
 
 
     // MISS 존 = 전체 Hit Zone (빨간색 - MISS 이미지 색상)
-
     fill(255, 100, 100, 15);
-
     stroke(255, 100, 100);
-
     strokeWeight(2);
-
     rectMode(CENTER);
-
     rect(hitZoneX, this.wallY, this.hitZoneWidth, 200);
 
-
-
-    // GOOD 존 표시 (파란색 - GOOD 이미지 색상) - 중심 40%
-
-    const goodWidth = this.hitZoneWidth * 0.8;
-
+    // GOOD 존 표시 (파란색 - GOOD 이미지 색상) - 중심 50%
+    const goodWidth = this.hitZoneWidth * 1.0;
     fill(100, 180, 255, 20);
-
     stroke(100, 180, 255);
-
     rect(hitZoneX, this.wallY, goodWidth, 200);
 
 
