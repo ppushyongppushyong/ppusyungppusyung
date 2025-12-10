@@ -399,16 +399,29 @@ function draw() {
       // [추가] 오토 플레이 로직 (벽이 WOW 판정 거리에 오면 자동 공격)
       if (isAutoPlay && gameStarted && !scoreManager.isGameEnded() && wallManager) {
         const hitZoneX = wallManager.getHitZoneX(character.x);
+
+        // 가장 가까운 판정 안된 벽 찾기
+        let closestWall = null;
+        let closestDistance = Infinity;
+
         for (let wall of wallManager.walls) {
           if (wall.currentState === wall.states.NORMAL && !wall.hasBeenJudged) {
             const distance = Math.abs(wall.x - hitZoneX);
-            const wowThreshold = wallManager.hitZoneWidth * 0.125;
-
-            if (distance <= wowThreshold) {
-              character.handleAttack();
-              canDestroyWall = true;
-              break;
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              closestWall = wall;
             }
+          }
+        }
+
+        // WOW 판정 범위에 들어오면 공격 (완벽한 타이밍)
+        if (closestWall) {
+          const wowThreshold = wallManager.hitZoneWidth * 0.125; // WOW 범위 (25px)
+
+          if (closestDistance <= wowThreshold) {
+            console.log(`🎯 자동 공격 실행! 벽 ID: ${closestWall.id || 'unknown'}, 거리: ${closestDistance.toFixed(1)}px`);
+            character.handleAttack();
+            canDestroyWall = true;
           }
         }
       }
@@ -419,6 +432,9 @@ function draw() {
 
       if (isCurrentlyAttacking && canDestroyWall) {
         const result = wallManager.tryDestroyWall(character.x);
+        if (result) {
+          console.log(`💥 판정 결과: ${result.type.toUpperCase()}, 파괴: ${result.destroyed}`);
+        }
         if (result && result.destroyed) {
           canDestroyWall = false;
           attackHitWall = true;
@@ -433,7 +449,10 @@ function draw() {
       const attackEnded = wasAttackingLastFrame && !isCurrentlyAttacking;
 
       if (attackStarted) {
-        canDestroyWall = true;
+        // 자동 모드에서는 WOW 범위 체크에서만 canDestroyWall 설정
+        if (!isAutoPlay) {
+          canDestroyWall = true;
+        }
         attackHitWall = false;
       }
 
@@ -442,8 +461,11 @@ function draw() {
           scoreManager.breakCombo();
         }
         if (attackStateChanged) {
-          canDestroyWall = true;
-          attackHitWall = false;
+          // 자동 모드에서는 attackStateChanged로 판정하지 않음 (정확한 타이밍에만)
+          if (!isAutoPlay) {
+            canDestroyWall = true;
+            attackHitWall = false;
+          }
         } else {
           canDestroyWall = false;
           attackHitWall = false;

@@ -450,20 +450,22 @@ class WallManager {
     // 이 벽은 판정을 받았음을 표시
     wall.hasBeenJudged = true;
 
-    // MISS 판정이 아닐 때만 벽 파괴
-    const destroyed = judgment !== 'miss';
-
     // 원래 위치 저장 (벽 이동 전)
     const originalX = wall.x;
 
-    if (destroyed) {
-      wall.destroy();
+    // 모든 판정에서 벽 파괴 (MISS도 벽은 제거되지만 점수/콤보는 sketch.js에서 처리 안됨)
+    wall.destroy();
+
+    // MISS가 아닐 때만 카운트
+    if (judgment !== 'miss') {
       this.destroyedCount++;
+    }
 
-      // 벽을 즉시 화면 밖으로 이동 (충돌 방지)
-      wall.x = -1000;
+    // 벽을 즉시 화면 밖으로 이동 (충돌 방지)
+    wall.x = -1000;
 
-      // 이펙트는 원래 위치에 생성
+    // MISS가 아닐 때만 이펙트 생성
+    if (judgment !== 'miss') {
       this.createHitEffect(originalX, this.wallY);
     }
 
@@ -475,6 +477,8 @@ class WallManager {
       y: this.wallY - 100
     };
 
+    // MISS가 아닐 때만 destroyed = true (점수 처리용)
+    const destroyed = judgment !== 'miss';
     return { type: judgment, destroyed: destroyed };
   }
 
