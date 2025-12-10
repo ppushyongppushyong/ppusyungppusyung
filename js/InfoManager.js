@@ -128,11 +128,8 @@ class InfoManager {
 
     push();
 
-    // 팝업을 최상위에 그리기 위해 translate 리셋
-    resetMatrix();
-
-    // 불투명 배경 (전체 화면) - 뒤의 요소 완전히 가리기
-    fill(0, 0, 0, 250);
+    // 반투명 배경 (게임 영역만)
+    fill(0, 0, 0, 220);
     rectMode(CORNER);
     rect(0, 0, this.baseWidth, this.baseHeight);
 

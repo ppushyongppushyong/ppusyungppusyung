@@ -30,7 +30,7 @@ let hpBarImages = {}; // HP 바 이미지
 let scoreBackboard; // 스코어 백보드 이미지
 let bgX1 = 0; // 첫 번째 배경 X 위치
 let bgX2; // 두 번째 배경 X 위치 (setup에서 설정)
-let baseBgSpeed = 12; // 기본 배경 스크롤 속도
+let baseBgSpeed = 24; // 기본 배경 스크롤 속도
 let bgSpeed = 24; // 현재 배경 스크롤 속도 (속도 배율 적용)
 
 // 음악 시스템
@@ -434,12 +434,18 @@ function draw() {
         const result = wallManager.tryDestroyWall(character.x);
         if (result) {
           console.log(`💥 판정 결과: ${result.type.toUpperCase()}, 파괴: ${result.destroyed}`);
-        }
-        if (result && result.destroyed) {
-          canDestroyWall = false;
-          attackHitWall = true;
-          scoreManager.addScore(result.type);
-          if (hitSoundManager) hitSoundManager.play();
+
+          // MISS 판정도 카운트 (점수는 주지 않음)
+          if (result.type === 'miss') {
+            scoreManager.judgmentCounts.miss++;
+            canDestroyWall = false;
+          } else if (result.destroyed) {
+            // MISS가 아닐 때만 점수 추가
+            canDestroyWall = false;
+            attackHitWall = true;
+            scoreManager.addScore(result.type);
+            if (hitSoundManager) hitSoundManager.play();
+          }
         }
       }
 
@@ -898,7 +904,7 @@ function drawStartScreen() {
     imageMode(CENTER);
     const logoWidth = 600;
     const logoHeight = (titleLogoImg.height / titleLogoImg.width) * logoWidth;
-    image(titleLogoImg, BASE_WIDTH / 2, BASE_HEIGHT / 2 - 320, logoWidth, logoHeight);
+    image(titleLogoImg, BASE_WIDTH / 2, BASE_HEIGHT / 2 - 260, logoWidth, logoHeight);
   } else {
     fill(255);
     textAlign(CENTER, CENTER);
@@ -1220,7 +1226,7 @@ function startNicknameInput() {
   const canvas = document.querySelector('canvas');
   const canvasRect = canvas.getBoundingClientRect();
   const inputX = canvasRect.left + (BASE_WIDTH / 2 - 160) * gameScale;
-  const inputY = canvasRect.top + (BASE_HEIGHT / 2 + 135) * gameScale;
+  const inputY = canvasRect.top + (BASE_HEIGHT / 2 + 165) * gameScale; // 140 + 25 (라벨 아래)
   nicknameInputElement.position(inputX - 80, inputY - 18);
   nicknameInputElement.elt.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {

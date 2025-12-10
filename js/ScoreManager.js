@@ -613,8 +613,8 @@ class ScoreManager {
 
     // 클리어 시에만 랭킹 표시 (박스 크기 조절)
     const showRanking = this.isCleared && rankingInfo;
-    const boxWidth = showRanking ? 700 : 500;
-    const boxHeight = showRanking ? 500 : 400;
+    const boxWidth = showRanking ? 750 : 500;
+    const boxHeight = showRanking ? 580 : 400;
 
     // 결과 박스
     if (this.isCleared) {
@@ -683,62 +683,69 @@ class ScoreManager {
       textSize(24);
       text(`${this.score}점`, leftX + 80, centerY - 10);
 
-      // 판정 통계
+      // 판정 통계 (2열로 배치)
       textSize(14);
       const statsY = centerY + 30;
+      const col1X = leftX - 50; // 왼쪽 열
+      const col2X = leftX + 50; // 오른쪽 열
+      const rowHeight = 22;
 
+      // WOW
       textAlign(LEFT, CENTER);
       fill(255, 215, 0);
-      text('WOW', leftX - 80, statsY);
+      text('WOW', col1X - 40, statsY);
       textAlign(RIGHT, CENTER);
-      text(`${this.judgmentCounts.wow}`, leftX + 80, statsY);
+      text(`${this.judgmentCounts.wow}`, col1X + 40, statsY);
 
+      // GREAT
       textAlign(LEFT, CENTER);
       fill(0, 255, 150);
-      text('GREAT', leftX - 80, statsY + 22);
+      text('GREAT', col2X - 40, statsY);
       textAlign(RIGHT, CENTER);
-      text(`${this.judgmentCounts.great}`, leftX + 80, statsY + 22);
+      text(`${this.judgmentCounts.great}`, col2X + 40, statsY);
 
+      // GOOD
       textAlign(LEFT, CENTER);
       fill(100, 200, 255);
-      text('GOOD', leftX - 80, statsY + 44);
+      text('GOOD', col1X - 40, statsY + rowHeight);
       textAlign(RIGHT, CENTER);
-      text(`${this.judgmentCounts.good}`, leftX + 80, statsY + 44);
+      text(`${this.judgmentCounts.good}`, col1X + 40, statsY + rowHeight);
 
+      // MISS
       textAlign(LEFT, CENTER);
       fill(200, 100, 100);
-      text('MISS', leftX - 80, statsY + 66);
+      text('MISS', col2X - 40, statsY + rowHeight);
       textAlign(RIGHT, CENTER);
-      text(`${this.judgmentCounts.miss}`, leftX + 80, statsY + 66);
+      text(`${this.judgmentCounts.miss}`, col2X + 40, statsY + rowHeight);
 
-      // 최대 콤보
-      textAlign(LEFT, CENTER);
+      // 최대 콤보 (가운데 정렬)
+      textAlign(CENTER, CENTER);
       fill(255, 150, 255);
-      text('MAX COMBO', leftX - 80, statsY + 88);
-      textAlign(RIGHT, CENTER);
-      text(`${this.maxCombo}`, leftX + 80, statsY + 88);
+      textSize(16);
+      text(`MAX COMBO: ${this.maxCombo}`, leftX, statsY + rowHeight * 2 + 10);
 
-      // 닉네임 입력
+      // 닉네임 입력 (위치를 아래로 조정)
+      const nicknameY = centerY + 140;
       if (rankingInfo.isEntering) {
         fill(255, 220, 100);
         textSize(16);
         textAlign(CENTER, CENTER);
-        text('닉네임 입력', leftX, centerY + 100);
+        text('닉네임 입력', leftX, nicknameY);
 
         // HTML input이 여기에 위치함 (sketch.js에서 생성)
 
         fill(150);
         textSize(12);
-        text('Enter로 저장 / ESC로 건너뛰기', leftX, centerY + 165);
+        text('Enter로 저장 / ESC로 건너뛰기', leftX, nicknameY + 65);
       } else if (rankingInfo.saved) {
         // 저장 완료
         fill(100, 255, 100);
         textSize(18);
         textAlign(CENTER, CENTER);
         if (rankingInfo.rank > 0) {
-          text(`${rankingInfo.rank}위 등록!`, leftX, centerY + 120);
+          text(`${rankingInfo.rank}위 등록!`, leftX, nicknameY + 20);
         } else {
-          text('저장 완료!', leftX, centerY + 120);
+          text('저장 완료!', leftX, nicknameY + 20);
         }
       }
 
@@ -794,12 +801,12 @@ class ScoreManager {
       fill(150);
       textAlign(CENTER, CENTER);
       textSize(14);
-      text('ESC 를 눌러 다시 시작', centerX, centerY + 205);
+      text('ESC 를 눌러 다시 시작', centerX, centerY + 240);
 
       // 카운트다운 표시
       fill(255, 200, 100);
-      textSize(20);
-      text(`${remaining}초 후 자동으로 메인 화면으로 이동`, centerX, centerY + 230);
+      textSize(18);
+      text(`${remaining}초 후 자동으로 메인 화면으로 이동`, centerX, centerY + 265);
 
     } else {
       // 게임 오버 시: 기존 레이아웃
