@@ -400,6 +400,36 @@ function draw() {
       }
       wallManager.display();
 
+      // [추가] 오토 플레이 로직
+if (isAutoPlay && gameStarted && !scoreManager.isGameEnded() && wallManager) {
+  // 캐릭터의 Hit Zone 중심 위치 가져오기
+  const hitZoneX = wallManager.getHitZoneX(character.x);
+  
+  // 모든 벽을 검사
+  for (let wall of wallManager.walls) {
+    // 1. 벽이 정상 상태이고
+    // 2. 아직 판정받지 않았으며
+    // 3. WOW 판정 범위(아주 가까운 거리) 내에 들어왔을 때
+    if (wall.currentState === wall.states.NORMAL && !wall.hasBeenJudged) {
+      
+      // 벽과 히트존 중심 사이의 거리 계산
+      const distance = Math.abs(wall.x - hitZoneX);
+      
+      // WOW 판정 범위 (WallManager.js의 calculateJudgment 참고: 너비의 12.5%)
+      const wowThreshold = wallManager.hitZoneWidth * 0.125; 
+
+      // 거리가 WOW 범위 이내이면 공격 실행
+      if (distance <= wowThreshold) {
+        // 공격 중이 아닐 때만 공격 명령 (중복 방지)
+        // 단, 콤보 연결을 위해 handleAttack은 호출 가능해야 함
+        character.handleAttack();
+        canDestroyWall = true; // 공격 성공 플래그 (중요)
+        break; // 한 프레임에 한 번만 공격 명령
+      }
+    }
+  }
+}
+
       // 공격 중일 때 벽 파괴 체크 (공격 애니메이션 동안 계속 체크)
       const isCurrentlyAttacking = character.isAttacking();
       const currentState = character.currentState;
@@ -667,6 +697,12 @@ function keyPressed() {
     }
   }
 
+  if (keyCode === 118) {
+    isAutoPlay = !isAutoPlay;
+    console.log(`🤖 오토 플레이 ${isAutoPlay ? 'ON' : 'OFF'}`);
+    return;
+  }
+  
   // 닉네임 입력 중일 때
   if (isEnteringNickname) {
     handleNicknameInput(key, keyCode);
