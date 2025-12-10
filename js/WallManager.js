@@ -21,7 +21,7 @@ class WallManager {
 
     // 벽 Y 위치 (지면에 맞춤)
     // 벽 생성 위치 (gameHeight - 200 - 75) -> (gameHeight - 200 - 200) 으로 변경
-    this.wallY = gameHeight - 200 - 200; // 캐릭터 발 위치에서 벽 높이/2 뺀 위치
+    this.wallY = gameHeight - 200 - 150; // 캐릭터 발 위치에서 벽 높이/2 뺀 위치
 
     // Hit Zone 설정 (캐릭터 앞쪽 공격 판정 영역)
     this.hitZoneOffset = 150; // 캐릭터 중심에서 Hit Zone까지의 거리
