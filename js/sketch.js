@@ -881,7 +881,7 @@ function drawStartScreen() {
     fill(255);
     textAlign(CENTER, CENTER);
     textSize(64);
-    text('뿌슝뿌슝', BASE_WIDTH / 2, BASE_HEIGHT / 2 - 320);
+    text('뿌슝뿌슝', BASE_WIDTH / 2, BASE_HEIGHT / 2 - 260);
   }
 
   // [2] 곡 선택 박스 (아래로 내림: 중심 -50)
