@@ -25,7 +25,7 @@ class WallManager {
     // [수정 포인트]
     // 1. 실제 게임의 바닥 높이 (화면 아래에서 얼마나 띄울지)
     // 예: 바닥 이미지가 화면 아래 100px 정도라면 100, 아니면 150 등으로 조절하세요.
-    const groundBottomOffset = 150; 
+    const groundBottomOffset = 125; 
     const groundY = gameHeight - groundBottomOffset;
 
     // 2. Wall 클래스에 설정된 높이 (Wall 클래스의 this.height = 300 과 같아야 함)
