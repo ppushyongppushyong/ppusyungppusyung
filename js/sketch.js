@@ -259,7 +259,7 @@ function setup() {
   canvas.parent('canvas-container');
 
   // 스페이스바 스크롤 방지
-  document.addEventListener('keydown', function(e) {
+  document.addEventListener('keydown', function (e) {
     if (e.code === 'Space') {
       e.preventDefault();
     }
@@ -279,7 +279,7 @@ function setup() {
     const characterHeight = SPRITE_CONFIG.frameHeight * SPRITE_CONFIG.characterScale;
     const characterY = groundY - (characterHeight / 2);
 
-    character = new Character(null, GAME_WIDTH / 5, characterY); // 기존 GAME_WIDTH / 4 -> GAME_WIDTH / 5 변경
+    character = new Character(null, GAME_WIDTH / 4, characterY);
     character.setScale(SPRITE_CONFIG.characterScale);
     character.setupAnimations(animations);
     character.setState(character.states.IDLE); // 시작 시 IDLE 상태
@@ -820,7 +820,7 @@ function checkWallCollision() {
 
   // 이미 데미지 상태이거나 죽은 상태면 무시
   if (character.currentState === character.states.DAMAGED ||
-      character.currentState === character.states.DEAD) {
+    character.currentState === character.states.DEAD) {
     return;
   }
 
