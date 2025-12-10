@@ -10,7 +10,7 @@ let character;
 let spriteSheets = {};
 let animations = {};
 let assetsLoaded = false;
-
+let isAutoPlay = false
 // 벽 시스템
 let wallManager;
 let wallSprites = []; // 벽 스프라이트 배열
