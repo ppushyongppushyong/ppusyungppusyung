@@ -18,8 +18,8 @@ class Wall {
     this.speed = speed;
 
     // 벽 크기
-    this.width = 200;
-    this.height = 375;
+    this.width = 160;
+    this.height = 300;
 
     // 상태
     this.states = {
