@@ -1712,7 +1712,7 @@ function updatePreviewButtonPosition() {
 
   // 곡 선택 박스 오른쪽에 배치
   const btnX = (windowWidth / 2) + 320 * gameScale;
-  const btnY = (windowHeight / 2) - 150 * gameScale;
+  const btnY = (windowHeight / 2) - 230 * gameScale;
   previewButton.position(btnX, btnY - 22);
 }
 
@@ -1805,7 +1805,7 @@ function styleArrowButton(btn) {
 function updateArrowButtonsPosition() {
   if (!leftArrowButton || !rightArrowButton) return;
 
-  const centerY = (windowHeight / 2) - 150 * gameScale;
+  const centerY = (windowHeight / 2) - 230 * gameScale;
 
   // 왼쪽 화살표: 곡 선택 박스 왼쪽
   const leftX = (windowWidth / 2) - 280 * gameScale;
