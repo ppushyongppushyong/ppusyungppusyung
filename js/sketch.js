@@ -528,20 +528,6 @@ function draw() {
       drawStartScreen();
     }
 
-    // 팝업 관리
-    if (infoManager && infoManager.isPopupOpen()) {
-      if (previewButton) previewButton.hide();
-      if (leftArrowButton) leftArrowButton.hide();
-      if (rightArrowButton) rightArrowButton.hide();
-      infoManager.displayPopup();
-    } else {
-      if (!gameStarted) {
-        if (previewButton) previewButton.show();
-        if (leftArrowButton) leftArrowButton.show();
-        if (rightArrowButton) rightArrowButton.show();
-      }
-    }
-
     // 게임 종료 화면
     if (scoreManager && scoreManager.isGameEnded()) {
       const config = getSelectedMusicConfig();
@@ -611,6 +597,20 @@ function draw() {
       textStyle(BOLD);
       text("🤖 AUTO PLAY ON", BASE_WIDTH / 2, 100);
       pop();
+    }
+
+    // 팝업 관리 (최상단에 표시)
+    if (infoManager && infoManager.isPopupOpen()) {
+      if (previewButton) previewButton.hide();
+      if (leftArrowButton) leftArrowButton.hide();
+      if (rightArrowButton) rightArrowButton.hide();
+      infoManager.displayPopup();
+    } else {
+      if (!gameStarted) {
+        if (previewButton) previewButton.show();
+        if (leftArrowButton) leftArrowButton.show();
+        if (rightArrowButton) rightArrowButton.show();
+      }
     }
 
   } else {
