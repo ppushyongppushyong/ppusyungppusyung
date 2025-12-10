@@ -29,7 +29,7 @@ const SPRITE_PRESETS = {
     characterScale: 3,
 
     // 땅 오프셋 (화면 하단에서 얼마나 위에 배치할지)
-    groundOffset: 200,
+    groundOffset: 250,
 
     // 애니메이션 파일 정의
     files: {
@@ -88,7 +88,7 @@ const SPRITE_PRESETS = {
     characterScale: 0.8,
 
     // 땅 오프셋 (화면 하단에서 얼마나 위에 배치할지)
-    groundOffset: 100,
+    groundOffset: 250,
 
     // 애니메이션 파일 정의 (개별 프레임)
     animations: {
