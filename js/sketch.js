@@ -279,7 +279,7 @@ function setup() {
     const characterHeight = SPRITE_CONFIG.frameHeight * SPRITE_CONFIG.characterScale;
     const characterY = groundY - (characterHeight / 2);
 
-    character = new Character(null, GAME_WIDTH / 4, characterY);
+    character = new Character(null, GAME_WIDTH / 5, characterY); // 기존 GAME_WIDTH / 4 -> GAME_WIDTH / 5 변경
     character.setScale(SPRITE_CONFIG.characterScale);
     character.setupAnimations(animations);
     character.setState(character.states.IDLE); // 시작 시 IDLE 상태
